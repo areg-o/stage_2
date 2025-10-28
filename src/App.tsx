@@ -1,5 +1,11 @@
+import { MenuBar } from '@/components';
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <MenuBar />
+    </>
+  );
 }
 
 export default App;
