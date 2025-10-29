@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { Add, Dashboard } from '@/pages';
 import { Layout } from '@/components';
+import { Add, Dashboard } from '@/pages';
 
 const router = createBrowserRouter([
   {
