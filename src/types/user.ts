@@ -22,3 +22,7 @@ export interface ICharacter {
   };
   results: IUser[];
 }
+
+export interface IUserListProps {
+  users: IUser[];
+}
