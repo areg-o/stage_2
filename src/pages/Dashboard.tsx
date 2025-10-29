@@ -1,12 +1,13 @@
-import { Spinner } from '../components/ui';
-
 import usersAPI from '@/api';
 import { UserList } from '@/components';
-import { useGet } from '@/hooks';
-import type { IUser } from '@/types';
+import { Spinner } from '@/components/ui';
+import { useGetAll } from '@/hooks';
 
 export function Dashboard() {
-  const { data, isPending, error } = useGet<IUser[]>(usersAPI.getUsers);
+  const { users, error, isPending, hasNextPage } = useGetAll({
+    queryFn: usersAPI.getAllUsers,
+    param: 1,
+  });
 
   if (isPending) {
     return (
@@ -18,5 +19,5 @@ export function Dashboard() {
 
   if (error) return <div>{error.message}</div>;
 
-  return <UserList users={data || []} />;
+  return <UserList users={users || []} />;
 }

@@ -5,7 +5,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Layout } from '@/components';
 import { Add, Dashboard } from '@/pages';
 
-// create router.ts
 const router = createBrowserRouter([
   {
     path: '',

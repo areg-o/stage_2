@@ -33,7 +33,7 @@ export function UserList({ users }: IUserListProps) {
         <TableBody>
           {users?.map((user) => (
             <TableRow key={user.id}>
-              <TableCell className="font-medium">#{user.id}</TableCell>
+              <TableCell className="font-medium">{user.id}.</TableCell>
               <TableCell>
                 <img className="w-[2.5vw] rounded-full" src={user.image} alt="avatar" />
               </TableCell>
@@ -57,9 +57,6 @@ export function UserList({ users }: IUserListProps) {
           </PaginationItem>
           <PaginationItem>
             <PaginationLink href="#">1</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#">2</PaginationLink>
           </PaginationItem>
           <PaginationItem>
             <PaginationEllipsis />
