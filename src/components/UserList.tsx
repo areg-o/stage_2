@@ -1,3 +1,6 @@
+import { useState } from 'react';
+
+import { Modal } from '@/components';
 import {
   Pagination,
   PaginationContent,
@@ -14,9 +17,13 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui';
+import { useModal } from '@/hooks';
 import type { IUserListProps } from '@/types';
 
 export function UserList({ users, nextPage, prevPage }: IUserListProps) {
+  const { isOpen, handleModal } = useModal();
+  const [selectedUserId, setSelectedUserId] = useState(0);
+
   return (
     <div className="flex flex-col w-full h-full">
       <Table className="overflow-hidden">
@@ -32,7 +39,14 @@ export function UserList({ users, nextPage, prevPage }: IUserListProps) {
         </TableHeader>
         <TableBody>
           {users?.map((user) => (
-            <TableRow key={user.id} className="cursor-pointer">
+            <TableRow
+              key={user.id}
+              className="cursor-pointer"
+              onClick={() => {
+                handleModal();
+                setSelectedUserId(user.id);
+              }}
+            >
               <TableCell className="font-medium">{user.id}.</TableCell>
               <TableCell>
                 <img className="w-[2.5vw] rounded-full" src={user.image} alt="avatar" />
@@ -66,6 +80,7 @@ export function UserList({ users, nextPage, prevPage }: IUserListProps) {
           </PaginationItem>
         </PaginationContent>
       </Pagination>
+      {selectedUserId > 0 && <Modal id={selectedUserId} onClose={handleModal} isOpen={isOpen} />}
     </div>
   );
 }

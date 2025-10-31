@@ -2,9 +2,9 @@ import apiClient from '@/lib/apiClient';
 import type { ICharacter, IUser } from '@/types';
 
 const usersAPI = {
-  async getUsers(): Promise<IUser[]> {
-    const resp = await apiClient.get('character');
-    return resp.data.results;
+  async getUser(id: number): Promise<IUser> {
+    const resp = await apiClient.get(`character/${id}`);
+    return resp.data;
   },
   async getAllUsers(page: number, name: string): Promise<ICharacter> {
     const query = name?.trim() ? `&name=${name}` : '';
