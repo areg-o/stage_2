@@ -31,4 +31,6 @@ export interface IUserListProps {
 
 export interface IUserData {
   user: IUser | undefined;
+  isPending: boolean;
+  error: Error | null;
 }

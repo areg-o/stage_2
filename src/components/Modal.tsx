@@ -14,8 +14,6 @@ export function Modal({ isOpen, onClose, id }: ModalProps) {
     queryFn: () => usersAPI.getUser(id),
   });
 
-  console.log(data);
-
   return createPortal(
     <div className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm z-50">
       <div className="relative bg-white rounded-2xl shadow-xl p-6 w-[90%] max-w-md animate-scale-in">
@@ -26,7 +24,7 @@ export function Modal({ isOpen, onClose, id }: ModalProps) {
           ×
         </button>
         <div className="modal-content text-gray-800">
-          <UserCard user={data} />
+          <UserCard user={data} error={error} isPending={isPending} />
         </div>
       </div>
     </div>,
