@@ -32,7 +32,7 @@ export function UserList({ users, nextPage, prevPage }: IUserListProps) {
         </TableHeader>
         <TableBody>
           {users?.map((user) => (
-            <TableRow key={user.id}>
+            <TableRow key={user.id} className="cursor-pointer">
               <TableCell className="font-medium">{user.id}.</TableCell>
               <TableCell>
                 <img className="w-[2.5vw] rounded-full" src={user.image} alt="avatar" />

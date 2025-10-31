@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import usersAPI from '@/api';
 import { UserList } from '@/components';
@@ -10,7 +10,7 @@ export function Dashboard() {
   const [page, setPage] = useState(1);
 
   const { searchText } = useSearch();
-  let debouncedSearch = useDebounce(searchText, 300);
+  const debouncedSearch = useDebounce<string>(searchText, 300);
 
   const { data, isPending, error, hasNextPage, isFetchingNextPage, fetchNextPage } =
     useInfiniteQuery({
@@ -28,9 +28,12 @@ export function Dashboard() {
   // const users = useMemo(() => data?.pages?.flatMap((page) => page.results) || [], [data]);
 
   const users = useMemo(() => {
-    if (searchText) setPage(1);
     return data?.pages?.[page - 1]?.results || [];
   }, [data, page]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [debouncedSearch]);
 
   const nextPage = () => {
     if (!hasNextPage || isFetchingNextPage) return;
