@@ -23,6 +23,7 @@ export function Dashboard() {
         return Number(page);
       },
       initialPageParam: 1,
+      retry: false,
     });
 
   // const users = useMemo(() => data?.pages?.flatMap((page) => page.results) || [], [data]);
@@ -50,7 +51,7 @@ export function Dashboard() {
   if (isPending) {
     return (
       <div className="flex items-center justify-center w-full h-full">
-        <Spinner />
+        <Spinner className="size-8" />
       </div>
     );
   }

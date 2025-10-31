@@ -28,3 +28,7 @@ export interface IUserListProps {
   nextPage: () => void;
   prevPage: () => void;
 }
+
+export interface IUserData {
+  user: IUser | undefined;
+}
