@@ -16,10 +16,26 @@ import {
 } from '@/components/ui';
 import type { IUserListProps } from '@/types';
 
-export function UserList({ users }: IUserListProps) {
+export function UserList({ users, nextPage, prevPage }: IUserListProps) {
   return (
-    <div className="flex flex-col w-full">
-      <Table>
+    <div className="flex flex-col w-full h-screen">
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem onClick={prevPage}>
+            <PaginationPrevious href="#" />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#">1</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationEllipsis />
+          </PaginationItem>
+          <PaginationItem onClick={nextPage}>
+            <PaginationNext href="#" />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
+      <Table className="h-svh">
         <TableCaption>A list of your characters.</TableCaption>
         <TableHeader>
           <TableRow>
@@ -50,22 +66,6 @@ export function UserList({ users }: IUserListProps) {
           ))}
         </TableBody>
       </Table>
-      <Pagination>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious href="#" />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#">1</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationNext href="#" />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
     </div>
   );
 }

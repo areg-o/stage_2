@@ -1,12 +1,15 @@
 import { Outlet } from 'react-router-dom';
 
-import { MenuBar } from '@/components';
+import { MenuBar, Search } from '@/components';
 
 export function Layout() {
   return (
     <div className="flex flex-row justify-between h-screen">
       <MenuBar />
-      <Outlet />
+      <div className="w-full h-full">
+        <Search />
+        <Outlet />
+      </div>
     </div>
   );
 }

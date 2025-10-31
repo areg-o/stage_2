@@ -1,13 +1,48 @@
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useMemo, useState } from 'react';
+
 import usersAPI from '@/api';
 import { UserList } from '@/components';
 import { Spinner } from '@/components/ui';
-import { useGetAll } from '@/hooks';
+import { useDebounce, useSearch } from '@/hooks';
 
 export function Dashboard() {
-  const { users, error, isPending, hasNextPage } = useGetAll({
-    queryFn: usersAPI.getAllUsers,
-    param: 1,
-  });
+  const [page, setPage] = useState(1);
+
+  const { searchText, setSearchText } = useSearch();
+  let debouncedSearch = useDebounce(searchText, 300);
+
+  const { data, isPending, error, hasNextPage, isFetchingNextPage, fetchNextPage } =
+    useInfiniteQuery({
+      queryKey: ['users', debouncedSearch],
+      queryFn: ({ pageParam }) => usersAPI.getAllUsers(pageParam, debouncedSearch),
+      getNextPageParam: (lastPage) => {
+        const { next } = lastPage?.info || {};
+        if (!next) return undefined;
+        const page = new URL(next).searchParams.get('page');
+        return Number(page);
+      },
+      initialPageParam: 1,
+    });
+
+  // const users = useMemo(() => data?.pages?.flatMap((page) => page.results) || [], [data]);
+
+  const users = useMemo(() => {
+    if (searchText) setPage(1);
+    return data?.pages?.[page - 1]?.results || [];
+  }, [data, page]);
+
+  const nextPage = () => {
+    if (!hasNextPage || isFetchingNextPage) return;
+    const newPage = page + 1;
+    setPage(newPage);
+    if (!!data?.pages.length && data.pages.length < newPage) fetchNextPage();
+  };
+
+  const prevPage = () => {
+    if (page === 1) return;
+    setPage((prev) => prev - 1);
+  };
 
   if (isPending) {
     return (
@@ -17,7 +52,7 @@ export function Dashboard() {
     );
   }
 
-  if (error) return <div>{error.message}</div>;
+  if (error) return <div className="ml-[1.2vw]">Sorry, name not founded...</div>;
 
-  return <UserList users={users || []} />;
+  return <UserList users={users} nextPage={nextPage} prevPage={prevPage} />;
 }

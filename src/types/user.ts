@@ -25,4 +25,6 @@ export interface ICharacter {
 
 export interface IUserListProps {
   users: IUser[];
+  nextPage: () => void;
+  prevPage: () => void;
 }
