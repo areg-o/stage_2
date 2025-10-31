@@ -9,7 +9,7 @@ import { useDebounce, useSearch } from '@/hooks';
 export function Dashboard() {
   const [page, setPage] = useState(1);
 
-  const { searchText, setSearchText } = useSearch();
+  const { searchText } = useSearch();
   let debouncedSearch = useDebounce(searchText, 300);
 
   const { data, isPending, error, hasNextPage, isFetchingNextPage, fetchNextPage } =

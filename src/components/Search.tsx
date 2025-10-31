@@ -12,7 +12,6 @@ export function Search() {
 
   return (
     <div className="flex w-full items-start max-w-sm items-center gap-2 my-[2vh] pl-[1.2vw]">
-      <label htmlFor="search">Search:</label>
       <Input
         value={searchText}
         onChange={handleChange}
@@ -26,7 +25,7 @@ export function Search() {
         className="cursor-pointer"
         variant="outline"
       >
-        Enter
+        Search
       </Button>
     </div>
   );

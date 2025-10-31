@@ -28,7 +28,7 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div className="overflow-hidden">
+    <div>
       <AppProvider>
         <QueryClientProvider client={queryClient}>
           <RouterProvider router={router} />
