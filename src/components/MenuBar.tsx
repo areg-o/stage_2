@@ -1,31 +1,10 @@
-import {
-  Menubar,
-  MenubarContent,
-  MenubarItem,
-  MenubarMenu,
-  MenubarSeparator,
-  MenubarShortcut,
-  MenubarTrigger,
-} from '@/components/ui/menubar';
+import { Logo, Menu } from '@/components';
 
 export function MenuBar() {
   return (
-    <div>
-      <Menubar>
-        <MenubarMenu>
-          <MenubarTrigger>File</MenubarTrigger>
-          <MenubarContent>
-            <MenubarItem>
-              New Tab <MenubarShortcut>⌘T</MenubarShortcut>
-            </MenubarItem>
-            <MenubarItem>New Window</MenubarItem>
-            <MenubarSeparator />
-            <MenubarItem>Share</MenubarItem>
-            <MenubarSeparator />
-            <MenubarItem>Print</MenubarItem>
-          </MenubarContent>
-        </MenubarMenu>
-      </Menubar>
+    <div className="menu-bar fixed top-0 left-0 flex flex-col items-center w-[15vw] border-r-2 h-screen p-[2vw] font-nunito">
+      <Logo />
+      <Menu />
     </div>
   );
 }
